@@ -18,33 +18,50 @@ def writeWitz(index, file):
             return False
 
 
-def removeDoubleLines():
-    realFile = open("allekinder.txt", "r")
+def removeDoubleLines(newFilename, oldFilename):
+    realFile = open(f"{oldFilename}.txt", "r")
     lines = realFile.readlines()
     witze = []
     print("Lines: " + str(lines))
     for line in lines:
         if witze.__contains__(line) == False:
             witze.append(line)
-    file = open("allekinder-kategorie.txt", "a")
+    file = open(f"{newFilename}.txt", "a")
     print("witze: " + str(witze))
     for witz in witze:
         file.write(witz)
 
 
-f.openAnyWebsite("https://www.witzepause.com/alle-kinder-sprueche?page=4")
-file = open("allekinder.txt", "a", encoding="utf-8")
-try:
-    for i in range(1, 200):
-        if writeWitz(i, file) == False:
-            indexList.append(i)
-except:
-    print("an error ocurred")
-print(indexList)
-while len(indexList) > 0:
-    for index in indexList:
-        if writeWitz(index, file) == True:
-            indexList.remove(index)
-            print(indexList)
-file.close()
-removeDoubleLines()
+def scrapeJokesOfSite(url, filename):
+    f.openAnyWebsite(url)
+    file = open(f"{filename}.txt", "a", encoding="utf-8")
+    try:
+        for i in range(1, 500):
+            if writeWitz(i, file) == False:
+                indexList.append(i)
+    except:
+        print("an error ocurred")
+    print(indexList)
+    while len(indexList) > 0:
+        for index in indexList:
+            if writeWitz(index, file) == True:
+                indexList.remove(index)
+                print(indexList)
+    file.close()
+
+
+def scrapeJokesOfAllSites(url, filename):
+    try:
+        for i in range(1, 200):
+            if i > 1:
+                addition = f"?page={i}"
+            else:
+                addition = ""
+            scrapeJokesOfSite(url + addition, filename)
+    except:
+        print("all pages scraped")
+
+
+scrapeJokesOfAllSites(
+    "https://www.witzepause.com/arbeitswitze", "arbeitswitze")
+removeDoubleLines("arbeitswitze-kategorie", "arbeitswitze")
