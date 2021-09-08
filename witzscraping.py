@@ -32,7 +32,7 @@ def removeDoubleLines():
         file.write(witz)
 
 
-f.openAnyWebsite("https://www.witzepause.com/alle-kinder-sprueche")
+f.openAnyWebsite("https://www.witzepause.com/alle-kinder-sprueche?page=4")
 file = open("allekinder.txt", "a", encoding="utf-8")
 try:
     for i in range(1, 200):
@@ -46,4 +46,5 @@ while len(indexList) > 0:
         if writeWitz(index, file) == True:
             indexList.remove(index)
             print(indexList)
+file.close()
 removeDoubleLines()
