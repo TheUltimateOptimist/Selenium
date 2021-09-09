@@ -89,6 +89,8 @@ listOfCategories = ["akademiker-witze", "alle-kinder-sprueche", "arztwitze", "an
 #     scrapeJokesOfAllSites(f"https://www.witzepause.com/{category}", category)
 #     removeDoubleLines(f"{category}-kategorie", f"{category}")
 
-for i, category in enumerate(listOfCategories):
-    if i > 10:
-        print("")
+for category in listOfCategories:
+    with open(f"gescrapteWitze/{category}-kategorie.txt", "r", encoding="utf-8") as readfile:
+        number = len(readfile.readlines())
+        with open(f"gescrapteWitze/1. witze-info.txt", "a", encoding="utf-8") as writeFile:
+            writeFile.write(category + ": " + str(number) + "\n")
