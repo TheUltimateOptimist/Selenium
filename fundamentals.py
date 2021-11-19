@@ -5,7 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 # location of the chrome webdriver
-PATH = "C:\AppDevelopment\chromedriver.exe"
+PATH = "/Users/jonathandueck/Desktop/chromedriver"
 
 # instantiation of webdriver
 driver = webdriver.Chrome(PATH)

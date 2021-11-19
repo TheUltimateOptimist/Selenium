@@ -6,17 +6,20 @@ class UnfoundEmails:
     liste = []
 
 def clickToEnd():
+    t = time.time()
     try:
         button = f.findElement("/html/body/div[2]/div[3]/div/div/div[1]/div/form/a", "x-path")
     except:
         button = f.findElement("/html/body/div[3]/div[3]/div/div/div[1]/div/form/a", "x-path")
     for i in range(100000005):
-        time.sleep(0.2)
+        time.sleep(0.6)
         try:
             button.click()
+            t = time.time()
         except Exception as e:
-            print(e)
-            break
+            if time.time() - t > 10:
+                print(e)
+                break
 
 def extractPropertie(text, prop_name, shouldBreak = True):
     if text.__contains__(prop_name):
@@ -103,7 +106,7 @@ def saveArticleEmail(pathList, number):
     email = extractEmail(pathList, number)
     if email is not None:
         entry = f"INSERT INTO scraped_companys(company_email) VALUES('{email}')"
-        sql.execute(entry)
+        sql.execute(email)
     else:
         print("email is none ", number)
 
