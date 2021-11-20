@@ -1,11 +1,13 @@
 import time
 import fundamentals as f
 import sql
+from auto_email import send
 class UnfoundEmails:
     number = 0
     liste = []
 
 def clickToEnd():
+    count = 50
     t = time.time()
     try:
         button = f.findElement("/html/body/div[2]/div[3]/div/div/div[1]/div/form/a", "x-path")
@@ -15,9 +17,13 @@ def clickToEnd():
         time.sleep(0.6)
         try:
             button.click()
+            count+=10
+            if count%10000 == 0:
+                send("jonathan.dueck@digital-confidence.de", "Email Scraping laoding page", f"{count} eamils successfully loaded")
             t = time.time()
         except Exception as e:
             if time.time() - t > 10:
+                send("jonathan.dueck@digital-confidence.de", "Email Scraping reached end of page", f"{count} eamils successfully loaded")
                 print(e)
                 break
 
@@ -112,6 +118,7 @@ def saveArticleEmail(pathList, number):
 
 
 def scrapeSite(letter):
+    send("jonathan.dueck@digital-confidence.de", "Email Scraping", f"starting work on letter {letter}")
     f.openAnyWebsite(f"https://www.gelbeseiten.de/Suche/{letter}/Deutschland")
     time.sleep(5)
     clickToEnd()

@@ -5,10 +5,11 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 # location of the chrome webdriver
-PATH = "/Users/jonathandueck/Desktop/chromedriver"
+PATH_MAC = "/Users/jonathandueck/Desktop/chromedriver"
+PATH_WINDOWS = "C:\AppDevelopment\chromedriver.exe"
 
 # instantiation of webdriver
-driver = webdriver.Chrome(PATH)
+driver = webdriver.Chrome(PATH_WINDOWS)
 
 # open any website:
 
