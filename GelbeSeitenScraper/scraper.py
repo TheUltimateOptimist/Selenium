@@ -40,10 +40,10 @@ class Scraper:
     def scrape(self):
         scrape_start_time = time.time()
         completed_combinations = self.state.completed_combinations
-        indices_tuple = BaseConverter(completed_combinations).toBase26(self.NUMBER_OF_LETTERS)
         for completed_combinations in range(26**self.NUMBER_OF_LETTERS):
-            self.__open_website(indices=indices_tuple)
+            self.__open_website(indices=BaseConverter(completed_combinations).toBase26(self.NUMBER_OF_LETTERS))
             EmailExtractor(self.state, self.__get_articles()).extract_all_emails()
             self.state.increase_completed_combinations()
             self.state.increase_time_passed(time.time() - scrape_start_time)
+            scrape_start_time = time.time()
 

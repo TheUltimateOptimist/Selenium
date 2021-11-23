@@ -1,4 +1,3 @@
-from scraper import Scraper
 from scrape_state import ScrapeState
 class EmailExtractor:
     BREAK_LIST = ['"', "/", "}", "{", "]", "[", "}", "\\", "'", "'", ",", ";", " ", ":", "?"]
@@ -33,7 +32,6 @@ class EmailExtractor:
         if email_found:
             self.__save_email(email)
         else:
-            print(index)
             self.scraper_state.increase_unfound_emails()
 
     def extract_all_emails(self):
