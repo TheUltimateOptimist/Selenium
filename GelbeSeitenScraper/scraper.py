@@ -35,7 +35,7 @@ class Scraper:
 
     def __get_number_of_articles(self):
         number = int(str(self.site.find("span", id="mod-TrefferlisteInfo")).split('">')[1].split("</")[0])
-        return number
+        return number if number < 50 else 50
 
     def scrape(self):
         scrape_start_time = time.time()

@@ -1,0 +1,4 @@
+completed_combinations=0
+found_emails=0
+unfound_emails=0
+time_passed=0.0

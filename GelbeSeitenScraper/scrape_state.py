@@ -4,9 +4,9 @@ class ScrapeState:
             lines = state_file.readlines()
             for i,line in enumerate(lines):
                 lines[i] = float(line.split("=")[1].split("\n")[0]) if i == 3 else int(line.split("=")[1].split("\n")[0])
-            self.found_emails = lines[0]
-            self.unfound_emails = lines[1]
-            self.completed_combinations = lines[2]
+            self.completed_combinations = lines[0]
+            self.found_emails = lines[1]
+            self.unfound_emails = lines[2]
             self.time_passed = lines[3]
 
     def update_file(self):
