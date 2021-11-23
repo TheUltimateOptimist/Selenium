@@ -1,4 +1,4 @@
-completed_combinations=26
-found_emails=1066
-unfound_emails=234
-time_passed=15.26289415359497
+completed_combinations=1695
+found_emails=20470
+unfound_emails=18987
+time_passed=2170.5066294670105

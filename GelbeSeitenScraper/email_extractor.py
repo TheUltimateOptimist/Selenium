@@ -1,4 +1,5 @@
 from scrape_state import ScrapeState
+from math import floor
 class EmailExtractor:
     BREAK_LIST = ['"', "/", "}", "{", "]", "[", "}", "\\", "'", "'", ",", ";", " ", ":", "?"]
     def __init__(self, scraper_state:ScrapeState, articles:list[str]) -> None:
@@ -6,7 +7,7 @@ class EmailExtractor:
         self.articles = articles
     
     def __save_email(self, email:str) -> None:
-        with open("scraped_emails.txt", "a") as emails_file:
+        with open(f"scraped_emails{floor(self.scraper_state.found_emails/10000)}.txt", "a") as emails_file:
             emails_file.write(email + "\n")
         self.scraper_state.increase_found_emails()
 
