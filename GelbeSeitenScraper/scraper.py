@@ -18,19 +18,24 @@ class Scraper:
         self.site = None
 
     def __open_website(self, indices:tuple[int]) -> None:
+        consecutive_fails = 0
         try:
             self.driver.get(WebsiteData.combination_link(indices))
             self.site = BeautifulSoup(self.driver.page_source, self.PARSER)
+            consecutive_fails = 0
         except:
-            time.sleep(10)
+            consecutive_fails+=1
+            if consecutive_fails == 3:
+                self.driver.quit()
+            time.sleep(3)
             self.__open_website(indices)
 
     def __get_articles(self) -> list[str]:
         articles = self.site.find_all("article")
         for i, article in enumerate(articles):
             articles[i] = str(article)
-        if len(articles) != self.__get_number_of_articles():
-            raise ValueError("retrieved articles do not include all found articles")
+        # if len(articles) != self.__get_number_of_articles():
+        #     raise ValueError("retrieved articles do not include all found articles")
         return articles
 
     def __get_number_of_articles(self):
