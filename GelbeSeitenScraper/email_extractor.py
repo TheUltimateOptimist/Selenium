@@ -2,7 +2,7 @@ from scrape_state import ScrapeState
 from math import floor
 class EmailExtractor:
     BREAK_LIST = ['"', "/", "}", "{", "]", "[", "}", "\\", "'", "'", ",", ";", " ", ":", "?"]
-    def __init__(self, scraper_state:ScrapeState, articles:list[str]) -> None:
+    def __init__(self, scraper_state:ScrapeState, articles:list) -> None:
         self.scraper_state = scraper_state
         self.articles = articles
     

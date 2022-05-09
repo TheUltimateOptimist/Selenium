@@ -1,26 +1,30 @@
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-class EmailData:
-    MY_ADDRESS = "jonathan.dueck@digital-confidence.de"
-    MY_PASSWORD = "A1a1B2b2C3c3D4d4"
-    HOST_ADDRESS = "smtp.1und1.de"
-    HOST_PORT = 587
+from credentials import Credentials
 
-def send(address, subject, text):
+def get_email():
+    with open("sales_email.txt", "r", encoding="utf-8") as file:
+        lines = file.readlines()
+        email = ""
+        for line in lines:
+            email+=line   
+    return email
+
+def send(address, subject):
     # connect to server
-    server = smtplib.SMTP(host=EmailData.HOST_ADDRESS, port=EmailData.HOST_PORT)
+    server = smtplib.SMTP(host=Credentials.HOST_ADDRESS, port=Credentials.HOST_PORT)
     server.starttls()
-    server.login(EmailData.MY_ADDRESS, EmailData.MY_PASSWORD)
+    server.login(Credentials.MY_ADDRESS, Credentials.MY_PASSWORD)
 
     #creation of MIMEMultipart Object
     message = MIMEMultipart()
-    message["From"] = EmailData.MY_ADDRESS
+    message["From"] = Credentials.MY_ADDRESS
     message["To"] = address
     message["Subject"] = subject
 
     # creation of MIMEText Part
-    textPart = MIMEText(text)
+    textPart = MIMEText(get_email())
 
     # part attachment
     message.attach(textPart)

@@ -1,11 +1,19 @@
-from scraper import Scraper  
+from scraper import Scraper, PostleizahlScraper  
 
 def main():
     platform = input("Enter 'windows' or 'mac': ")
     if platform == "windows":
-        Scraper(on_windows=True).scrape()
+        scraper = input("Enter p to scrape postleizahlen c to scrape by combinations: ")
+        if scraper == "p":
+            PostleizahlScraper(on_windows=True).scrape()
+        elif scraper == "c":
+            Scraper(on_windows=True).scrape()
     elif platform == "mac":
-        Scraper(on_windows=False).scrape()
+        scraper = input("Enter p to scrape postleizahlen c to scrape by combinations: ")
+        if scraper == "p":
+            PostleizahlScraper(on_windows=False).scrape()
+        elif scraper == "c":
+            Scraper(on_windows=False).scrape()
     else:
         main()
 
