@@ -1,34 +1,33 @@
 import time
-from fundamentals import getPageSourceCode, openAnyWebsite
 from bs4 import BeautifulSoup
 import keyboard
 
 PARSER = "html.parser"
 
-def extractWords(source_code):
-    soup = BeautifulSoup(source_code, PARSER)
+def doTyping():
+    time.sleep(4)
+    soup = BeautifulSoup(getSourceCode(), PARSER)
     words = []
     ui = soup.find("div", id="words")
     for item in ui.children:
         words.append(item.text)
-    
-    # with open("text.txt", "w") as file:
-    #     file.write("'" + words[0] + " " + "'")
-    return words[0] + " "
+    writeStuff(words[0] + " ")
 
 def writeStuff(text):
-    for letter in text:
-        keyboard.write(letter)
-        time.sleep(1)
-
-def doTyping(delay=10, open_website=True, type_site_url="https://10fastfingers.com/typing-test/german"):
-    if open_website:
-        openAnyWebsite(type_site_url)
-        time.sleep(delay)
-    text = extractWords(getPageSourceCode())
-    time.sleep(delay)
+    # for letter in text:
+    #     if letter != " " and letter.isupper():
+    #         keyboard.press_and_release("shift + " + letter)
+    #     else:
+    #         keyboard.press_and_release(letter)
+    #     number = random.randint(1, 8)
+    #     time.sleep(number / 100)
     keyboard.write(text)
-doTyping()
+
+def getSourceCode():
+    with open("text.txt", "r", encoding="utf8") as file:
+        code = file.read()
+        # code.replace("\n", "")
+        return code
     
     
     
